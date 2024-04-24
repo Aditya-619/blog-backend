@@ -24,23 +24,12 @@ async function main() {
 // };
 
 
-const allowedOrigins = ['http://localhost:5173'];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
 
 
 server.use(express.json({extended: true}))
 server.use(express.urlencoded({extended:true}))
 // server.use(cors({credentials:true, origin: "http://localhost:5173"}))
-server.use(cors(corsOptions))
+server.use(cors())
 
 server.use(upload())
 server.use('/uploads', express.static(__dirname + '/uploads'))
